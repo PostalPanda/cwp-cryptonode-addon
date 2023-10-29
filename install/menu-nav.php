@@ -1,0 +1,1 @@
+<li><a href="index.php?module=cryptonodes"><span class="icon16 icomoon-icon-arrow-right-3"></span>Crypto Nodes by Panda</a></li>
