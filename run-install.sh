@@ -1,22 +1,31 @@
 #!/bin/bash
 
-# Install the 'keyboard' package using pip3
-pip3 install keyboard
+# Create a log file with the current date and time
+LOG_FILE="install-$(date +'%Y-%m-%d_%H-%M-%S').log"
+
+# Function to log messages to the log file
+log_message() {
+    echo "$(date +'%Y-%m-%d %H:%M:%S') - $1" >> "$LOG_FILE"
+}
+
+# Install the 'keyboard' and 'pyfiglet' package using pip3 and log the step
+log_message "Installing the 'keyboard' package using pip3..."
+pip3 install keyboard pyfiglet >> "$LOG_FILE" 2>&1
 
 # Check if the installation was successful
 if [ $? -eq 0 ]; then
-    echo "keyboard package installed successfully."
-    echo "Running install.py..."
-    
-    # Run your install.py script here
-    python3 install.py
-    
+    log_message "keyboard package installed successfully."
+    log_message "Running install.py..."
+
+    # Run your install.py script and log the step
+    python3 install.py >> "$LOG_FILE" 2>&1
+
     # Check the exit status of install.py
     if [ $? -eq 0 ]; then
-        echo "install.py completed successfully."
+        log_message "install.py completed successfully."
     else
-        echo "Error: install.py exited with a non-zero status."
+        log_message "Error: install.py exited with a non-zero status."
     fi
 else
-    echo "Error: Failed to install the 'keyboard' package."
+    log_message "Error: Failed to install the 'keyboard' package."
 fi
